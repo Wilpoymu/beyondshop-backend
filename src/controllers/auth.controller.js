@@ -21,7 +21,6 @@ export const signUp = async (req, res) => {
   }
 
   const savedUser = await newUser.save();
-  console.log(savedUser);
 
   const token = jwt.sign({ id: savedUser._id }, config.SECRET, {
     expiresIn: 86400, // 24 hours

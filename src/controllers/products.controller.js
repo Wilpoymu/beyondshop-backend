@@ -6,7 +6,6 @@ export const getProducts = async (req, res) => {
 }
 
 export const createProduct = async (req, res) => {
-    console.log(req.body);
 
     const {name, price} = req.body;
 
