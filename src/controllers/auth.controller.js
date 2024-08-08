@@ -29,7 +29,6 @@ export const signUp = async (req, res) => {
       id: savedUser._id,
       username: savedUser.username,
       email: savedUser.email,
-      password: savedUser.password,
       createdAt: savedUser.createdAt,
       updatedAt: savedUser.updatedAt,
     });
@@ -57,7 +56,13 @@ export const signIn = async (req, res) => {
     const token = await createAccessToken({ id: userFound._id });
 
     res.cookie('token', token);
-    res.json({ message: 'Login successful' });
+    res.status(200).json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      createdAt: userFound.createdAt,
+      updatedAt: userFound.updatedAt,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
