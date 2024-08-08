@@ -1,6 +1,4 @@
 import User from '../models/User';
-import jwt from 'jsonwebtoken';
-import config from '../config';
 import Role from '../models/Role';
 import { createAccessToken } from '../libs/jwt';
 
