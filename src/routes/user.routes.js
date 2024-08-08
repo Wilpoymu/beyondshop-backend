@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import * as userCtrl from '../controllers/user.controller';
-import { authorization } from '../middlewares';
+import { authorization, validation } from '../middlewares';
 const router = Router();
 
 router.post(
-  '/signup',
-  [authorization.verifyToken, authorization.isAdmin],
+  '/',
+  [authorization.verifyToken, authorization.isAdmin, validation.checkRolesExist],
   userCtrl.createUser,
 );
 
