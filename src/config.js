@@ -1,3 +1,3 @@
 export default {
-    SECRET: 'beyond-auth-secret'
-}
+  SECRET: 'beyond-auth-secret',
+};

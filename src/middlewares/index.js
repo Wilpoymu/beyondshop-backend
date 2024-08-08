@@ -1,3 +1,3 @@
-import { verifyToken } from "./authorization";
+import * as authorization from './authorization';
 
-export { verifyToken };
+export { authorization };
