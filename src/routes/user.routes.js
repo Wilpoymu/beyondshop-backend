@@ -5,7 +5,11 @@ const router = Router();
 
 router.post(
   '/',
-  [authorization.verifyToken, authorization.isAdmin, validation.checkRolesExist],
+  [
+    authorization.verifyToken,
+    authorization.isAdmin,
+    validation.checkRolesExist,
+  ],
   userCtrl.createUser,
 );
 

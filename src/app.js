@@ -13,7 +13,7 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
-app.use(/* middleware */ morgan('dev')); // Log requests to the console
+app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
 
 app.get('/', (req, res) => {
