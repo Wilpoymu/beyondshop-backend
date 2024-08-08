@@ -1,5 +1,7 @@
+import jwt from 'jsonwebtoken';
 import { ROLES } from '../models/Role';
 import User from '../models/User';
+import config from '../config';
 
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
@@ -23,4 +25,18 @@ export const checkRolesExist = (req, res, next) => {
   }
 
   next();
+};
+
+export const authRequired = (req, res, next) => {
+  const { token } = req.cookies;
+
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+  jwt.verify(token, config.SECRET, (err, user) => {
+    if (err) return res.status(401).json({ message: 'Invalid token' });
+
+    req.user = user;
+
+    next();
+  });
 };
