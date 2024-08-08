@@ -15,4 +15,6 @@ router.post('/signin', authCtrl.signIn);
 
 router.post('/logout', authCtrl.logout);
 
+router.get('/profile', validation.authRequired, authCtrl.profile)
+
 export default router;
