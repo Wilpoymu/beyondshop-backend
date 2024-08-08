@@ -10,6 +10,9 @@ router.post(
   [validation.checkDuplicateUsernameOrEmail, validation.checkRolesExist],
   authCtrl.signUp,
 );
+
 router.post('/signin', authCtrl.signIn);
+
+router.post('/logout', authCtrl.logout);
 
 export default router;
