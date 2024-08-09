@@ -5,10 +5,11 @@ import config from '../config';
 
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
-  if (user) return res.status(400).json(['The user already exists']);
+  if (user) return res.status(400).json({ message: 'The user already exists' });
 
   const email = await User.findOne({ email: req.body.email });
-  if (email) return res.status(400).json(['The email already exists']);
+  if (email)
+    return res.status(400).json({ message: 'The email already exists' });
 
   next();
 };
@@ -38,15 +39,4 @@ export const authRequired = (req, res, next) => {
 
     next();
   });
-};
-
-export const validateSchema = (schema) => (req, res, next) => {
-  try {
-    schema.parse(req.body);
-    next();
-  } catch (error) {
-    return res
-      .status(400)
-      .json(error.errors.map((error) => error.message));
-  }
 };
