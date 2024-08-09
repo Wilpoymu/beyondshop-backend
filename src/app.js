@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import pkg from '../package.json';
+import cors from 'cors';
 
 import { createRoles } from './libs/initialSetup';
 
@@ -14,6 +15,7 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
+app.use(cors())
 app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
 app.use(cookieParser())
