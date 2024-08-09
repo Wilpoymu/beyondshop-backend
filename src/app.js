@@ -8,12 +8,14 @@ import productsRoutes from './routes/product.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
 createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
+app.use(cors());
 app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
 app.use(cookieParser())
