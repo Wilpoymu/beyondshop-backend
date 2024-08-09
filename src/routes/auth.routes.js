@@ -8,14 +8,15 @@ import { loginSchema, registerSchema } from '../schemas/auth.schema';
 
 router.post(
   '/signup',
+  validation.validateSchema(registerSchema),
   [validation.checkDuplicateUsernameOrEmail, validation.checkRolesExist],
   authCtrl.signUp,
 );
 
-router.post('/signin', authCtrl.signIn);
+router.post('/signin', validation.validateSchema(loginSchema), authCtrl.signIn);
 
 router.post('/logout', authCtrl.logout);
 
-router.get('/profile', validation.authRequired, authCtrl.profile)
+router.get('/profile', validation.authRequired, authCtrl.profile);
 
 export default router;
