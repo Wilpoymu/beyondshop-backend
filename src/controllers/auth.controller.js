@@ -1,6 +1,8 @@
 import User from '../models/User';
 import Role from '../models/Role';
+import jwt from 'jsonwebtoken';
 import { createAccessToken } from '../libs/jwt';
+import config from '../config';
 
 export const signUp = async (req, res) => {
   const { username, email, password, roles } = req.body;
@@ -85,5 +87,24 @@ export const profile = async (req, res) => {
     email: userFound.email,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
+  });
+};
+
+export const verifyToken = async (req, res) => {
+  const { token } = req.cookies;
+
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+  jwt.verify(token, config.SECRET, async (err, user) => {
+    if (err) return res.status(401).json({ message: 'Unauthorized' });
+
+    const userFound = await User.findById(user.id)
+    if (!userFound) return res.status(401).json({ message: 'Unauthorized' });
+
+    return res.json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+    })
   });
 };
