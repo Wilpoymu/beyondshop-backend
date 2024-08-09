@@ -48,5 +48,5 @@ export const isClient = async (req, res, next) => {
     }
   }
 
-  return res.status(403).json({ message: 'Require client Role!' });
+  return res.status(403).json({ message: 'Require Admin Role!' });
 };
