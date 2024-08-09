@@ -4,6 +4,7 @@ const router = Router();
 
 import * as authCtrl from '../controllers/auth.controller';
 import { validation } from '../middlewares';
+import { loginSchema, registerSchema } from '../schemas/auth.schema';
 
 router.post(
   '/signup',
