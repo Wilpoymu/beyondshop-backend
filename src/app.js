@@ -15,7 +15,10 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}))
 app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
 app.use(cookieParser())
