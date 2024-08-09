@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 export default {
   SECRET: process.env.SECRET,
+  corsOrigin: process.env.CORS_ORIGIN
 };
 
 export const port =

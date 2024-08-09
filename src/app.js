@@ -9,6 +9,7 @@ import productsRoutes from './routes/product.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import cookieParser from 'cookie-parser';
+import config from './config';
 
 const app = express();
 createRoles(); // Create the roles in the database
@@ -16,7 +17,7 @@ createRoles(); // Create the roles in the database
 app.set('pkg', pkg); // Save the package.json in the app
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: config.corsOrigin,
   credentials: true,
 }))
 app.use(morgan('dev')); // Log requests to the console
