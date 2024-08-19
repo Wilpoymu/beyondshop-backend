@@ -2,7 +2,9 @@ import Order from '../models/Order';
 
 export const getOrders = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find()
+      .populate('clientId')
+      .populate('productsDetails.productId');
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
@@ -13,22 +15,18 @@ export const createOrder = async (req, res) => {
   try {
     const { clientId, productsDetails } = req.body;
 
-    // Calculate totalPrice for each product
     const updatedProductsDetails = productsDetails.map((product) => ({
       ...product,
       totalPrice: product.quantity * product.unitPrice,
     }));
 
-    // Create a new order object
     const newOrder = new Order({
       clientId,
       productsDetails: updatedProductsDetails,
     });
 
-    // Save the order to the database
     const savedOrder = await newOrder.save();
 
-    // Send a success response
     res.status(201).json(savedOrder);
   } catch (error) {
     console.log(error);
@@ -38,7 +36,9 @@ export const createOrder = async (req, res) => {
 
 export const getOrderById = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.orderId);
+    const order = await Order.findById(req.params.orderId)
+      .populate('clientId')
+      .populate('productsDetails.productId');
     res.status(200).json(order);
   } catch (error) {
     console.log(error);
