@@ -21,5 +21,4 @@ router.get('/verify', authCtrl.verifyToken);
 
 router.get('/profile', validation.authRequired, authCtrl.profile);
 
-
 export default router;

@@ -41,7 +41,7 @@ export const updateProductById = async (req, res) => {
         new: true,
       },
     );
-    res.status(204).json(upddatedProduct); 
+    res.status(204).json(upddatedProduct);
   } catch (error) {
     res.status(404).json({ message: 'Product not found' });
   }

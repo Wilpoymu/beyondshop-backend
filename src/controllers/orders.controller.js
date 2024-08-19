@@ -60,7 +60,7 @@ export const updateOrderById = async (req, res) => {
     console.log(error);
     res.status(404).json({ message: 'Order not found' });
   }
-}
+};
 
 export const deleteOrderById = async (req, res) => {
   try {
