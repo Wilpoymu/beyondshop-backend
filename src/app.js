@@ -8,6 +8,7 @@ import { createRoles } from './libs/initialSetup';
 import productsRoutes from './routes/product.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import orderRoutes from './routes/order.routes';
 import cookieParser from 'cookie-parser';
 import config from './config';
 
@@ -16,13 +17,15 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
-app.use(cors({
-  origin: config.corsOrigin,
-  credentials: true,
-}))
+app.use(
+  cors({
+    origin: config.corsOrigin,
+    credentials: true,
+  }),
+);
 app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.json({
@@ -37,5 +40,6 @@ app.get('/', (req, res) => {
 app.use('/api/products', productsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 export default app;
