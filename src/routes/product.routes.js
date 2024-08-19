@@ -10,7 +10,7 @@ router.post(
   '/',
   [authorization.verifyToken, authorization.isAdmin],
   productsCtrl.createProduct,
-); // Add verifyToken middleware
+);
 
 router.get('/:productId', productsCtrl.getProductById);
 
