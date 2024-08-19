@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import config from '../config';
 
 export function createAccessToken(payload) {
@@ -16,4 +16,3 @@ export function createAccessToken(payload) {
     );
   });
 }
-
