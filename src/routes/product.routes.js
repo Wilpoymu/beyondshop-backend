@@ -16,7 +16,7 @@ router.get('/:productId', productsCtrl.getProductById);
 
 router.put(
   '/:productId',
-  authorization.verifyToken,
+  [authorization.verifyToken, authorization.isAdmin],
   productsCtrl.updateProductById,
 );
 
