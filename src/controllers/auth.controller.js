@@ -26,10 +26,7 @@ export const signUp = async (req, res) => {
 
     const token = await createAccessToken({ id: savedUser._id });
 
-    res.cookie('token', token, {
-      httpOnly: true,          // Hace que la cookie solo sea accesible a través de HTTP(S) y no mediante JavaScript del lado del cliente.
-      sameSite: 'strict',      // Previene que la cookie sea enviada en solicitudes de sitios cruzados.
-    });
+    res.cookie('token', token);
     res.status(200).json({
       id: savedUser._id,
       username: savedUser.username,
@@ -60,10 +57,7 @@ export const signIn = async (req, res) => {
 
     const token = await createAccessToken({ id: userFound._id });
 
-    res.cookie('token', token, {
-      httpOnly: true,          // Hace que la cookie solo sea accesible a través de HTTP(S) y no mediante JavaScript del lado del cliente.
-      sameSite: 'strict',      // Previene que la cookie sea enviada en solicitudes de sitios cruzados.
-    });
+    res.cookie('token', token);
     res.status(200).json({
       id: userFound._id,
       username: userFound.username,

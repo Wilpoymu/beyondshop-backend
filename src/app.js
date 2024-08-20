@@ -18,15 +18,15 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
+app.use(cookieParser());
 app.use(
   cors({
-    origin: config.corsOrigin || 'http://localhost:5173',
+    origin: config.corsOrigin,
     credentials: true,
   }),
 );
 app.use(morgan('dev')); // Log requests to the console
 app.use(express.json()); // Receive JSON data
-app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.json({
