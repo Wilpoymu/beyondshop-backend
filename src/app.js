@@ -20,7 +20,7 @@ app.set('pkg', pkg); // Save the package.json in the app
 
 app.use(
   cors({
-    origin: config.corsOrigin,
+    origin: config.corsOrigin || 'http://localhost:5173',
     credentials: true,
   }),
 );

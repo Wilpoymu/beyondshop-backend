@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { ROLES } from '../models/Role';
 import User from '../models/User';
 import config from '../config';
+import Customer from '../models/Customer';
 
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
@@ -22,6 +23,13 @@ export const checkRolesExist = (req, res, next) => {
       }
     }
   }
+
+  next();
+};
+
+export const checkDuplicateCustomers = async (req, res, next) => {
+  const customer = await Customer.findOne({ document: req.body.document });
+  if (customer) return res.status(400).json(['The customer already exists']);
 
   next();
 };

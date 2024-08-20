@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as customerController from '../controllers/customer.controller';
 
-import { authorization } from '../middlewares';
+import { authorization, validation } from '../middlewares';
 
 const router = Router();
 
@@ -19,7 +19,11 @@ router.get(
 
 router.post(
   '/',
-  [authorization.verifyToken, authorization.isAdmin],
+  [
+    validation.checkDuplicateCustomers,
+    authorization.verifyToken,
+    authorization.isAdmin,
+  ],
   customerController.createCustomer,
 );
 

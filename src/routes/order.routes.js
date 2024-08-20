@@ -16,6 +16,12 @@ router.get(
   ordersCtrl.getOrderById,
 );
 
+router.get(
+  '/customer/:clientId',
+  [authorization.verifyToken, authorization.isClient],
+  ordersCtrl.getOrderByCustomerId,
+);
+
 router.post(
   '/',
   [authorization.verifyToken, authorization.isClient],

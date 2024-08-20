@@ -17,12 +17,16 @@ export const createOrder = async (req, res) => {
 
     const updatedProductsDetails = productsDetails.map((product) => ({
       ...product,
-      totalPrice: product.quantity * product.unitPrice,
     }));
+
+    const totalPrice = productsDetails.reduce((acc, product) => {
+      return acc + product.price;
+    }, 0);
 
     const newOrder = new Order({
       clientId,
       productsDetails: updatedProductsDetails,
+      totalPrice,
     });
 
     const savedOrder = await newOrder.save();
@@ -43,6 +47,17 @@ export const getOrderById = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: 'Order not found' });
+  }
+};
+
+export const getOrderByCustomerId = async (req, res) => {
+  try {
+    const orders = await Order.find({ clientId: req.params.clientId })
+      .populate('clientId')
+      .populate('productsDetails.productId');
+    res.status(200).json(orders);
+  } catch (error) {
+    console.log(error);
   }
 };
 
