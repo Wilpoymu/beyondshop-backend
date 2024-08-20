@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const orderSchema = Schema(
   {
-    clientId: { type: Schema.Types.ObjectId, ref: 'User' },
+    clientId: { type: Schema.Types.ObjectId, ref: 'Customer' },
     orderDate: { type: Date, default: Date.now },
     productsDetails: [
       {
