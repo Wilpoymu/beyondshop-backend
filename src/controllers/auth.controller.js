@@ -27,10 +27,10 @@ export const signUp = async (req, res) => {
     const token = await createAccessToken({ id: savedUser._id });
 
     res.cookie('token', token, {
-      SameSite: 'none',
-      Secure: false,
-      HttpOnly: true,
-      Path: '/',
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+      path: '/',
     });
     res.status(200).json({
       id: savedUser._id,
@@ -63,10 +63,10 @@ export const signIn = async (req, res) => {
     const token = await createAccessToken({ id: userFound._id });
 
     res.cookie('token', token, {
-      SameSite: 'none',
-      Secure: false,
-      HttpOnly: true,
-      Path: '/',
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+      path: '/',
     });
     res.status(200).json({
       id: userFound._id,
