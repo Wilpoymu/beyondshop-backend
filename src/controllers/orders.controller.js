@@ -4,10 +4,14 @@ export const getOrders = async (req, res) => {
   try {
     const orders = await Order.find()
       .populate('clientId')
-      .populate('productsDetails.productId');
+      .populate({
+        path: 'productsDetails.productId',
+        model: 'Product'
+      });
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
@@ -81,6 +85,7 @@ export const deleteOrderById = async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.orderId);
     res.status(204).json();
+    console.log('Order deleted', req.params.orderId);
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: 'Order not found' });
