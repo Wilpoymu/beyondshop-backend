@@ -5,7 +5,8 @@ import Role from '../models/Role';
 
 export const verifyToken = async (req, res, next) => {
   try {
-    const token = req.headers['x-access-token'];
+    // const token = req.headers['x-access-token'];
+    const token = req.cookies.token; // Leer el token de las cookies
 
     if (!token) return res.status(403).json({ message: 'No token provided' });
 

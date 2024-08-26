@@ -37,7 +37,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// app.use(requiere('./routes/product.routes'));
 app.use('/api/products', productsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
