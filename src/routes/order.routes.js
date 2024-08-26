@@ -18,13 +18,13 @@ router.get(
 
 router.get(
   '/customer/:clientId',
-  [authorization.verifyToken, authorization.isClient],
+  [authorization.verifyToken, authorization.isAdmin],
   ordersCtrl.getOrderByCustomerId,
 );
 
 router.post(
   '/',
-  [authorization.verifyToken, authorization.isClient],
+  [authorization.verifyToken, authorization.isAdmin],
   ordersCtrl.createOrder,
 );
 
