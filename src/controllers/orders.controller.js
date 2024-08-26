@@ -2,12 +2,10 @@ import Order from '../models/Order';
 
 export const getOrders = async (req, res) => {
   try {
-    const orders = await Order.find()
-      .populate('clientId')
-      .populate({
-        path: 'productsDetails.productId',
-        model: 'Product'
-      });
+    const orders = await Order.find().populate('clientId').populate({
+      path: 'productsDetails.productId',
+      model: 'Product',
+    });
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
