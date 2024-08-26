@@ -27,10 +27,9 @@ export const signUp = async (req, res) => {
     const token = await createAccessToken({ id: savedUser._id });
 
     res.cookie('token', token, {
-      sameSite: 'none',
-      secure: true,
-      httpOnly: true,
-      path: '/',
+      httpOnly: true, // Solo accesible a través de HTTP, no desde JavaScript
+      secure: process.env.NODE_ENV === 'production', // Solo en HTTPS si estás en producción
+      sameSite: 'none', // Permite el envío de cookies en solicitudes de sitios cruzados
     });
     res.status(200).json({
       id: savedUser._id,
@@ -61,12 +60,10 @@ export const signIn = async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
 
     const token = await createAccessToken({ id: userFound._id });
-
     res.cookie('token', token, {
       sameSite: 'none',
-      secure: true,
+      secure: process.env.NODE_ENV === 'production', // Solo en HTTPS si estás en producción
       httpOnly: true,
-      path: '/',
     });
     res.status(200).json({
       id: userFound._id,
