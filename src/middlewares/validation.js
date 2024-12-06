@@ -35,15 +35,14 @@ export const checkDuplicateCustomers = async (req, res, next) => {
 };
 
 export const authRequired = (req, res, next) => {
-  const { token } = req.cookies;
+  const token = req.headers['authorization']?.split(' ')[1]; // Leer el token del header Authorization
 
-  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+  if (!token) return res.status(401).json({ message: 'No token provided' });
 
-  jwt.verify(token, config.SECRET, (err, user) => {
-    if (err) return res.status(401).json({ message: 'Invalid token' });
+  jwt.verify(token, config.SECRET, (err, decoded) => {
+    if (err) return res.status(401).json({ message: 'Unauthorized' });
 
-    req.user = user;
-
+    req.userId = decoded.id;
     next();
   });
 };

@@ -8,7 +8,6 @@ router.get('/', productsCtrl.getProducts);
 
 router.post(
   '/',
-  [authorization.verifyToken, authorization.isAdmin],
   productsCtrl.createProduct,
 );
 
@@ -16,13 +15,11 @@ router.get('/:productId', productsCtrl.getProductById);
 
 router.put(
   '/:productId',
-  [authorization.verifyToken, authorization.isAdmin],
   productsCtrl.updateProductById,
 );
 
 router.delete(
   '/:productId',
-  [authorization.verifyToken, authorization.isAdmin],
   productsCtrl.deleteProductById,
 );
 

@@ -15,7 +15,7 @@ router.post(
 
 router.post('/signin', validation.validateSchema(loginSchema), authCtrl.signIn);
 
-router.post('/logout', authCtrl.logout);
+router.post('/logout', authCtrl.logout); // Re-add this line
 
 router.get('/verify', authCtrl.verifyToken);
 
