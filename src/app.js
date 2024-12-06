@@ -10,7 +10,6 @@ import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import orderRoutes from './routes/order.routes';
 import customerRoutes from './routes/customer.routes';
-import cookieParser from 'cookie-parser';
 import config from './config';
 
 const app = express();
@@ -18,7 +17,6 @@ createRoles(); // Create the roles in the database
 
 app.set('pkg', pkg); // Save the package.json in the app
 
-app.use(cookieParser());
 app.use(
   cors({
     origin: config.corsOrigin,
